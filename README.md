@@ -31,7 +31,7 @@ Le fichier `sudoku.csv` n’est pas inclus dans ce dépôt en raison de sa taill
 4. Placer `sudoku.csv` dans ce dossier
 
 ## Structure du projet
-PAI---Sudoku/
+QuOM---Sudoku/
 ├─ src/
 │ ├─ main.py
 │ ├─ grid.py
