@@ -22,6 +22,9 @@ class SudokuGrid:
         self.player_grid = [row[:] for row in initial_grid]
 
     def fill_cell(self, row, col, value):
+        """
+        Si la case choisie par le joueur est vide, on attribue la valeur donnée par le joueur
+        """
     
         if self.initial_grid[row][col] == 0:
             self.player_grid[row][col] = value
@@ -36,13 +39,13 @@ class SudokuGrid:
 
     def is_correct(self, row, col):
         """
-        check si aleur entrée ds une case est ok
+        check si la valeur entrée dans une case est juste
         """
         return self.player_grid[row][col] == self.solution[row][col]
 
     def is_completed(self):
         """
-        check si tte la grille correctement remplie
+        check si tte la grille est correctement remplie
         """
         for i in range(9):
             for j in range(9):
@@ -77,3 +80,4 @@ class SudokuGrid:
             print(line)
             if (i + 1) % 3 == 0 and i < 8:
                 print("- - - + - - - + - - -")
+
