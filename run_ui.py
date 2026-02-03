@@ -2,7 +2,7 @@
 import os
 import sys
 
-# --- Permet d'importer ui/ et src/ même si on lance depuis src/ ---
+# Permet d'importer ui/ et src/ même si on lance depuis src/ 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))          # .../SUDOKU/src
 PROJECT_ROOT = os.path.dirname(THIS_DIR)                      # .../SUDOKU
 if PROJECT_ROOT not in sys.path:
@@ -26,4 +26,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
