@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jan 10 18:34:29 2026
-
-@author: julie
-"""
-
 # src/data_loader.py
 import pandas as pd
 
@@ -41,7 +34,7 @@ def load_raw_puzzles(csv_path: str, limit: int | None = 5000) -> list[dict]:
 def assign_difficulty_terciles(raw: list[dict]) -> list[dict]:
     """
     Assigne easy/medium/hard en 3 groupes (1/3-1/3-1/3) selon le nombre de zéros.
-    Heuristique simple, remplaçable plus tard.
+    simple, remplaçable plus tard.
     """
     raw_sorted = sorted(raw, key=lambda d: d["zeros"])
     n = len(raw_sorted)
@@ -68,6 +61,7 @@ def assign_difficulty_terciles(raw: list[dict]) -> list[dict]:
 
 
 def load_puzzles(csv_path: str, limit: int | None = 5000) -> list[dict]:
-    """Fonction unique appelée par le reste du projet."""
+    """Fonction unique appelée par le reste du projet"""
     raw = load_raw_puzzles(csv_path, limit=limit)
     return assign_difficulty_terciles(raw)
+
