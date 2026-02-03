@@ -1,77 +1,6 @@
 import os
-import pandas as pd
-
 from game import SudokuGame
-
-
-def string81_to_grid(s): # transforme chaîne de 81 chiffres en grille 9x9.
-
-    s = str(s).strip()
-    if len(s) != 81:
-        raise ValueError("Une grille doit contenir exactement 81 chiffres.")
-    return [[int(s[i * 9 + j]) for j in range(9)] for i in range(9)]
-
-
-def infer_difficulty(puzzle_str): # deduit difficulte à partir du nbre de O (cases vides)
-                                  # + y a de 0, + c dur  
-    zeros = puzzle_str.count("0")
-
-    if zeros <= 40:
-        return "easy"
-    elif zeros <= 50:
-        return "medium"
-    else:
-        return "hard"
-
-
-def load_puzzles_from_csv(csv_path, max_grids=None):
-    import pandas as pd
-
-    df = pd.read_csv(csv_path, usecols=["quizzes", "solutions"])
-
-    # Limite éventuelle pour accélérer
-    if max_grids is not None:
-        df = df.sample(n=max_grids, random_state=0)
-
-    puzzles_temp = []
-
-    for _, row in df.iterrows():
-        puzzle_str = row["quizzes"]
-        solution_str = row["solutions"]
-
-        puzzle_grid = string81_to_grid(puzzle_str)
-        solution_grid = string81_to_grid(solution_str)
-        zeros = puzzle_str.count("0")
-
-        puzzles_temp.append({
-            "puzzle": puzzle_grid,
-            "solution": solution_grid,
-            "zeros": zeros
-        })
-
-    # Tri par nombre de zéros
-    puzzles_temp.sort(key=lambda p: p["zeros"])
-
-    n = len(puzzles_temp)
-    one_third = n // 3
-
-    puzzles = []
-    for i, p in enumerate(puzzles_temp):
-        if i < one_third:
-            difficulty = "easy"
-        elif i < 2 * one_third:
-            difficulty = "medium"
-        else:
-            difficulty = "hard"
-
-        puzzles.append({
-            "puzzle": p["puzzle"],
-            "solution": p["solution"],
-            "difficulty": difficulty
-        })
-
-    return puzzles
-
+from data_loader import load_puzzles
 
 
 ######### programme principal ##########
@@ -81,7 +10,7 @@ def main(): # trouver automatiquemet chemin vers data/sudoku.csv
     csv_path = os.path.join(base_dir, "data", "sudoku.csv")
 
     print("Chargement de la base de données...")
-    puzzles = load_puzzles_from_csv(csv_path, max_grids=5000)
+    puzzles = load_puzzles(csv_path, limit=10000)
     print(f"{len(puzzles)} grilles chargées.\n")
 
     # creation jeu
@@ -111,7 +40,7 @@ def main(): # trouver automatiquemet chemin vers data/sudoku.csv
         game.grid.display()
 
         if game.is_finished():
-            print("\n🎉 Grille terminée et correcte !")
+            print("\n Grille terminée et correcte !")
             break
 
         cmd = input("\n> ").strip().lower()
@@ -138,9 +67,9 @@ def main(): # trouver automatiquemet chemin vers data/sudoku.csv
 
             if mode == "immediate":
                 if result:
-                    print("✔ Correct")
+                    print(" Correct")
                 else:
-                    print(f"❌ Incorrect (erreurs : {game.errors})")
+                    print(f" Incorrect (erreurs : {game.errors})")
 
         except Exception:
             print("Commande invalide. Exemple : 1,3,9")
@@ -150,4 +79,6 @@ def main(): # trouver automatiquemet chemin vers data/sudoku.csv
 
 if __name__ == "__main__":
     main()
+
+
 
