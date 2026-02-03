@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jan 10 18:35:09 2026
-
-@author: julie
-"""
-
 # ui/interface_qt.py
 import sys
 from PySide6.QtCore import Qt
@@ -41,14 +34,14 @@ class SudokuWindow(QMainWindow):
         root = QHBoxLayout()
         central.setLayout(root)
 
-        # ---- Zone gauche: grille 9x9
+        # Zone gauche: grille 9x9
         self.grid_layout = QGridLayout()
         self.grid_layout.setSpacing(2)
         left = QWidget()
         left.setLayout(self.grid_layout)
         root.addWidget(left)
 
-        # ---- Zone droite: contrôles
+        # Zone droite: contrôles
         right = QVBoxLayout()
         root.addLayout(right)
 
@@ -93,7 +86,7 @@ class SudokuWindow(QMainWindow):
 
         right.addStretch(1)
 
-        # ---- Création des 81 boutons
+        # Création des 81 boutons
         self.cells = [[CellButton(r, c) for c in range(9)] for r in range(9)]
         for r in range(9):
             for c in range(9):
@@ -103,7 +96,7 @@ class SudokuWindow(QMainWindow):
 
         self.new_game()
 
-    # ---------- Actions ----------
+    # Actions 
     def new_game(self):
         diff = self.diff_combo.currentText()
         mode = self.mode_combo.currentText()
@@ -127,14 +120,14 @@ class SudokuWindow(QMainWindow):
 
         if self.game.mode == "immediate":
             if result is True:
-                self.info.setText("✔ Correct")
+                self.info.setText("Correct")
             elif result is False:
-                self.info.setText(f"❌ Incorrect (erreurs : {self.game.errors})")
+                self.info.setText(f"Incorrect (erreurs : {self.game.errors})")
 
         self.refresh()
 
         if self.game.is_finished():
-            QMessageBox.information(self, "Bravo", "🎉 Sudoku terminé !")
+            QMessageBox.information(self, "Bravo", "Sudoku terminé !")
 
     def erase_cell(self):
         if self.selected is None:
@@ -145,11 +138,11 @@ class SudokuWindow(QMainWindow):
         self.refresh()
 
     def show_solution(self):
-        sol = self.game.grid.solution_grid
+        sol = self.game.grid.solution
         text = "\n".join(" ".join(str(x) for x in row) for row in sol)
         QMessageBox.information(self, "Solution", text)
 
-    # ---------- Affichage ----------
+    # Affichage 
     def refresh(self):
         g = self.game.grid.player_grid
         init = self.game.grid.initial_grid
@@ -165,7 +158,7 @@ class SudokuWindow(QMainWindow):
                 else:
                     btn.setEnabled(True)
 
-                # COLLER ICI LE CODE DES BORDURES
+                # CODE DES BORDURES
                 top = 3 if r % 3 == 0 else 1
                 left = 3 if c % 3 == 0 else 1
                 right = 3 if c == 8 else 1
@@ -196,3 +189,4 @@ def run_qt_app(game):
     win = SudokuWindow(game)
     win.show()
     app.exec()
+
