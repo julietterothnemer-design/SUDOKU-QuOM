@@ -1,13 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Nov  17 15:32:10 2025
-
-@author: julie
-"""
-
 # src/game.py
 import random
 from grid import SudokuGrid
+
 
 
 class SudokuGame:
