@@ -5,12 +5,12 @@ from data_loader import load_puzzles
 
 ######### programme principal ##########
 
-difficulty = "easy"
-
 def main(): # trouver automatiquemet chemin vers data/sudoku.csv
-    global difficulty
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+    csv_path = os.path.join(base_dir, "data","sudoku.csv")
+    print("Chargement de la base de données...")
+    puzzles = load_puzzles(json_path, limit=10000)
+    print(f"{len(puzzles)} grilles chargées.\n")
     # creation jeu
     game = SudokuGame(puzzles)
 
@@ -19,11 +19,7 @@ def main(): # trouver automatiquemet chemin vers data/sudoku.csv
     if difficulty not in ("easy", "medium", "hard"):
         print("Difficulté inconnue → easy par défaut.")
         difficulty = "easy"
-    json_name = f"puzzles_{difficulty}.json"
-    json_path = os.path.join(base_dir, "data",json_name)
-    print("Chargement de la base de données...")
-    puzzles = load_puzzles(json_path, limit=10000)
-    print(f"{len(puzzles)} grilles chargées.\n")
+
 
     mode = input("Choisissez le mode (immediate / delayed) : ").strip().lower()
     if mode not in ("immediate", "delayed"):
@@ -82,6 +78,7 @@ def main(): # trouver automatiquemet chemin vers data/sudoku.csv
 
 if __name__ == "__main__":
     main()
+
 
 
 
