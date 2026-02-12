@@ -5,7 +5,10 @@ from data_loader import load_puzzles
 
 ######### programme principal ##########
 
+difficulty = "easy"
+
 def main(): # trouver automatiquemet chemin vers data/sudoku.csv
+    global difficulty
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     # creation jeu
@@ -79,6 +82,7 @@ def main(): # trouver automatiquemet chemin vers data/sudoku.csv
 
 if __name__ == "__main__":
     main()
+
 
 
 
