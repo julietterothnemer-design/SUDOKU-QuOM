@@ -13,12 +13,14 @@ if THIS_DIR not in sys.path:
 from game import SudokuGame
 from data_loader import load_puzzles
 from ui.interface_qt import run_qt_app
+from main import difficulty
 
 
 def main():
-    csv_path = os.path.join(PROJECT_ROOT, "data", "sudoku.csv")
+    json_name = f"puzzles_{difficulty}.json"
+    json_path = os.path.join(PROJECT_ROOT, "data", json_name)
 
-    puzzles = load_puzzles(csv_path, limit=5000)
+    puzzles = load_puzzles(json_path, limit=5000)
     game = SudokuGame(puzzles)
 
     run_qt_app(game)
@@ -26,5 +28,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
