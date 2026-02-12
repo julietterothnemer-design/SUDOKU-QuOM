@@ -40,10 +40,7 @@ SUDOKU/
 │
 ├─ data/
 │ ├─ sudoku.csv # Base de données Kaggle (non incluse dans le dépôt)
-| ├─ puzzles_easy.json
-| ├─ puzzles_medium.json
-| ├─ puzzles_hard.json
-│
+
 ├─ src/
 │ ├─ grid.py # Classe SudokuGrid : gestion de la grille
 │ ├─ game.py # Classe SudokuGame : logique du jeu
@@ -80,7 +77,6 @@ Une heuristique simple est utilisée :
   - `easy`
   - `medium`
   - `hard`
-Ces grilles sont enregistrées dans le fichier json correspondant à leur difficulté. Ainsi, seuls ces fichiers sont nécessaires pour jouer au jeu, sans avoir besoin de télécharger le dataset Kaggle.
 Ce système de classification est perfectible et pourra par exemple être remplacé ultérieurement par un dataset fournissant une notation explicite de la difficulté.
 
 ---
