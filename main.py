@@ -7,7 +7,6 @@ from data_loader import load_puzzles
 
 def main(): # trouver automatiquemet chemin vers data/sudoku.csv
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    csv_path = os.path.join(base_dir, "data", "sudoku.csv")
 
     # creation jeu
     game = SudokuGame(puzzles)
@@ -18,6 +17,7 @@ def main(): # trouver automatiquemet chemin vers data/sudoku.csv
         print("Difficulté inconnue → easy par défaut.")
         difficulty = "easy"
         
+    json_path = os.path.join(base_dir, "data", "sudoku.csv")
     print("Chargement de la base de données...")
     puzzles = load_puzzles(csv_path, limit=10000)
     print(f"{len(puzzles)} grilles chargées.\n")
@@ -79,6 +79,7 @@ def main(): # trouver automatiquemet chemin vers data/sudoku.csv
 
 if __name__ == "__main__":
     main()
+
 
 
 
